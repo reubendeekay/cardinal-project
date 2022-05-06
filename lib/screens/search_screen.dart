@@ -102,7 +102,7 @@ class _EstateSearchScreenState extends State<EstateSearchScreen> {
             },
             initialCameraPosition: CameraPosition(
               target: LatLng(loc!.latitude!, loc.longitude!),
-              zoom: 7.0,
+              zoom: 15.0,
             ),
           ),
           Positioned(

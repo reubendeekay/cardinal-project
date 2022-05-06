@@ -506,7 +506,7 @@ class _AgentRegistrationScreenState extends State<AgentRegistrationScreen> {
                         });
                         await Provider.of<AuthProvider>(context, listen: false)
                             .getAgent();
-                        Get.to(() => const AgentSplashScreen());
+                        Get.off(() => const AgentSplashScreen());
                       });
                     },
                     child: isLoading

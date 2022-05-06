@@ -49,6 +49,7 @@ class PropertyProvider with ChangeNotifier {
     notifyListeners();
   }
 
+//On editing
   Future<void> addRecentSearch(String searchTerm) async {
     if (searchTerm.isNotEmpty) {
       final searchData = await FirebaseFirestore.instance

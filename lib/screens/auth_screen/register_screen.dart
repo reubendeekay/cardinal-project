@@ -115,6 +115,32 @@ class _EstateRegisterScreenState extends State<EstateRegisterScreen> {
                           ),
                           FxSpacing.height(16),
                           FxText.bodyLarge(
+                            'Phone number',
+                            fontWeight: 600,
+                          ),
+                          FxTextField(
+                            textFieldType: FxTextFieldType.mobileNumber,
+                            textFieldStyle: FxTextFieldStyle.underlined,
+                            enabledBorderColor:
+                                theme.colorScheme.onBackground.withAlpha(160),
+                            autoIcon: false,
+                            filled: false,
+                            labelText: "Your phone number",
+                            contentPadding: FxSpacing.fromLTRB(0, 8, 4, 20),
+                            labelStyle: TextStyle(
+                              fontSize: 12,
+                              color:
+                                  theme.colorScheme.onBackground.withAlpha(140),
+                            ),
+                            isCollapsed: true,
+                            controller:
+                                estateRegisterController.phoneController,
+                            focusedBorderColor: customTheme.estatePrimary,
+                            floatingLabelBehavior: FloatingLabelBehavior.never,
+                            cursorColor: customTheme.estatePrimary,
+                          ),
+                          FxSpacing.height(16),
+                          FxText.bodyLarge(
                             'Password',
                             fontWeight: 600,
                           ),
