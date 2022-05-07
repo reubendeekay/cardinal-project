@@ -30,7 +30,7 @@ class PropertyController extends FxController {
         .collection('propertyData')
         .doc('propertyListing')
         .collection('properties')
-        .where('status', isNotEqualTo: 'sold')
+        // .where('status', isNotEqualTo: 'sold')
         .get();
     List<PropertyModel> propData = [];
 

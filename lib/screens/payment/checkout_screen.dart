@@ -281,7 +281,7 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                 splashColor: theme.colorScheme.onPrimary.withAlpha(30),
                 backgroundColor: theme.colorScheme.primary,
                 child: FxText.labelMedium(
-                  'Proceed to Payment',
+                  'Proceed to Request',
                   color: theme.colorScheme.onPrimary,
                   fontWeight: 600,
                 ),
@@ -541,7 +541,7 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
               )),
           FxSpacing.height(20),
           FxText.titleLarge(
-            'Payment Success',
+            'Request Success',
             fontWeight: 700,
           ),
           FxSpacing.height(8),

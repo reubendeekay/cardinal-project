@@ -28,7 +28,7 @@ class CheckOutController extends FxController {
     contactSelected = user;
     tabs = [
       Tab('Contact', Icons.person_outline),
-      Tab('Payment', Icons.payment),
+      // Tab('Payment', Icons.payment),
       Tab('Placed', Icons.check_circle_outline),
     ];
   }
