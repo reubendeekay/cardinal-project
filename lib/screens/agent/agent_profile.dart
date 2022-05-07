@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cardinal/controllers/chat_controller.dart';
 import 'package:cardinal/helpers/loading_effect.dart';
@@ -12,7 +14,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutx/flutx.dart';
 import 'package:get/route_manager.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../controllers/agent_controller.dart';
 import '../../models/agent_model.dart';
@@ -249,13 +253,30 @@ class _AgentProfileState extends State<AgentProfile> {
                           paddingAll: 4,
                           color: customTheme.estatePrimary.withAlpha(40),
                           child: Icon(
-                            Icons.house,
+                            widget.agent.website != null
+                                ? MdiIcons.web
+                                : Icons.house,
                             color: customTheme.estatePrimary,
                             size: 14,
                           )),
                       FxSpacing.width(12),
-                      FxText.bodySmall(
-                        widget.agent.numProperties!.toString() + ' Listings',
+                      InkWell(
+                        onTap: widget.agent.website == null
+                            ? null
+                            : () async {
+                                await launchUrl(
+                                    Uri.parse(widget.agent.website!));
+                              },
+                        child: FxText.bodySmall(
+                          widget.agent.website ??
+                              widget.agent.numProperties!.toString() +
+                                  ' Listings',
+                          style: widget.agent.website == null
+                              ? null
+                              : TextStyle(
+                                  color: customTheme.estatePrimary,
+                                  decoration: TextDecoration.underline),
+                        ),
                       ),
                     ],
                   ),

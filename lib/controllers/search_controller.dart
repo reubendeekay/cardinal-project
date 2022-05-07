@@ -101,8 +101,8 @@ class EstateSearchController extends FxController {
   }
 
   onPageChange(int position) {
-    mapController.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
-        target: marker.toList()[position].position, zoom: 10.5)));
+    mapController.animateCamera(CameraUpdate.newCameraPosition(
+        CameraPosition(target: marker.toList()[position].position, zoom: 18)));
   }
 
   @override

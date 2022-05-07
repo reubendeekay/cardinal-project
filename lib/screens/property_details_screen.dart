@@ -1,10 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cardinal/helpers/agent_shimer.dart';
+import 'package:cardinal/helpers/cached_image.dart';
 import 'package:cardinal/helpers/loading_effect.dart';
 import 'package:cardinal/models/agent_model.dart';
 import 'package:cardinal/models/property_model.dart';
 import 'package:cardinal/providers/agent_provider.dart';
 import 'package:cardinal/providers/auth_provider.dart';
+import 'package:cardinal/screens/agent/property_location.dart';
 import 'package:cardinal/screens/payment/checkout_screen.dart';
 import 'package:cardinal/theme/app_theme.dart';
 import 'package:flutx/flutx.dart';
@@ -133,6 +135,7 @@ class _PropertyDetailsScreenState extends State<PropertyDetailsScreen> {
             ),
             Expanded(
               child: ListView(
+                shrinkWrap: true,
                 padding: FxSpacing.y(16),
                 children: [
                   FxContainer(
@@ -357,6 +360,38 @@ class _PropertyDetailsScreenState extends State<PropertyDetailsScreen> {
                       ],
                     ),
                   ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  FxText.bodyLarge("Photos", fontWeight: 600, letterSpacing: 0),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  SizedBox(
+                    height: 150,
+                    child: SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Row(
+                            children: List.generate(
+                                widget.property.images!.length,
+                                (i) => AspectRatio(
+                                      aspectRatio: 16 / 9,
+                                      child: cachedImage(
+                                          widget.property.images![i],
+                                          fit: BoxFit.cover),
+                                    )))),
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  FxText.bodyLarge("Location",
+                      fontWeight: 600, letterSpacing: 0),
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  PropertyLocation(
+                    property: widget.property,
+                  )
                 ],
               ),
             ),
@@ -365,6 +400,8 @@ class _PropertyDetailsScreenState extends State<PropertyDetailsScreen> {
               onPressed: () {
                 Get.to(() => CheckOutScreen(
                       property: estateSingleEstateController.property,
+                      user: Provider.of<AuthProvider>(context, listen: false)
+                          .user!,
                     ));
               },
               child: FxText.bodyMedium(

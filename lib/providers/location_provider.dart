@@ -8,8 +8,10 @@ class UserLocation {
   final String? address;
   final String? city;
   final String? country;
+  final String? state;
 
-  UserLocation({this.locationData, this.address, this.city, this.country});
+  UserLocation(
+      {this.locationData, this.address, this.city, this.country, this.state});
 }
 
 class LocationProvider with ChangeNotifier {
@@ -61,6 +63,7 @@ class LocationProvider with ChangeNotifier {
       address: data.address,
       city: data.city,
       country: data.country,
+      state: data.state,
       locationData: LatLng(
         _locationData!.latitude!,
         _locationData!.longitude!,

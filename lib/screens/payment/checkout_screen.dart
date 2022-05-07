@@ -15,8 +15,10 @@ import 'package:flutx/flutx.dart';
 import 'package:provider/provider.dart';
 
 class CheckOutScreen extends StatefulWidget {
-  const CheckOutScreen({Key? key, required this.property}) : super(key: key);
+  const CheckOutScreen({Key? key, required this.property, required this.user})
+      : super(key: key);
   final PropertyModel property;
+  final UserModel user;
 
   @override
   _CheckOutScreenState createState() => _CheckOutScreenState();
@@ -205,7 +207,7 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                     },
                     children: [
                       contactInformation(),
-                      paymentInfo(),
+                      // paymentInfo(),
                       placedInfo()
                     ],
                   ),
@@ -258,7 +260,20 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
             Expanded(
               child: FxButton(
                 padding: FxSpacing.y(12),
-                onPressed: () {
+                onPressed: () async {
+                  final request = RequestModel(
+                      amount: widget.property.price,
+                      createdAt: Timestamp.now(),
+                      ownerId: widget.property.ownerId,
+                      paymentMethod: 'Agent Defined',
+                      propertyId: widget.property.id,
+                      status: 'Successful',
+                      userId: uid);
+                  await Provider.of<PaymentProvider>(context, listen: false)
+                      .purchaseProperty(request);
+                  setState(() {
+                    isLoading = false;
+                  });
                   controller.nextPage();
                 },
                 borderRadiusAll: 4,
@@ -339,7 +354,7 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                 ),
                 FxSpacing.height(8),
                 FxText.bodySmall(
-                  'Nency AnGhan',
+                  widget.user.fullName!,
                   fontWeight: 600,
                 ),
                 FxSpacing.height(4),
@@ -354,7 +369,7 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                 ),
                 FxSpacing.height(20),
                 FxText.bodySmall(
-                  'Secure checkout powered by OnePay',
+                  'Secure checkout powered by MasterCard',
                   muted: true,
                 ),
               ],
@@ -483,26 +498,9 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
           FxSpacing.height(20),
           FxButton.block(
             onPressed: () async {
-              final request = RequestModel(
-                  amount: widget.property.price,
-                  createdAt: Timestamp.now(),
-                  ownerId: widget.property.ownerId,
-                  paymentMethod: controller.paymentMethodSelected == 0
-                      ? 'Credit Card'
-                      : 'Cash on premise',
-                  propertyId: widget.property.id,
-                  status: 'Successful',
-                  userId: uid);
               setState(() {
                 isLoading = true;
               });
-
-              await Provider.of<PaymentProvider>(context, listen: false)
-                  .purchaseProperty(request);
-              setState(() {
-                isLoading = false;
-              });
-              controller.nextPage();
             },
             borderRadiusAll: 4,
             elevation: 0,

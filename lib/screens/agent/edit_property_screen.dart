@@ -735,9 +735,7 @@ class _EditPropertyScreenState extends State<EditPropertyScreen> {
                     ],
                   ),
                   child: ElevatedButton(
-                    onPressed: coverImage == null ||
-                            imageFiles.isEmpty ||
-                            propertyLocation == null
+                    onPressed: coverImage == null || imageFiles.isEmpty
                         ? null
                         : () async {
                             if (formKey.currentState!.validate()) {

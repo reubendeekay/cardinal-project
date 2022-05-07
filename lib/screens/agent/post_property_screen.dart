@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:cardinal/helpers/add_on_map.dart';
+import 'package:cardinal/helpers/my_dropdown.dart';
 import 'package:cardinal/helpers/my_loader.dart';
 import 'package:cardinal/models/ammenities_model.dart';
 import 'package:cardinal/models/property_model.dart';
@@ -43,6 +44,15 @@ class _PostPropertyScreenState extends State<PostPropertyScreen> {
   String? baths;
   String? area;
   String? floors;
+
+  List<String> options = [
+    'Apartment',
+    'Cottage',
+    'Business Hub',
+    'Beach House',
+    'Villa',
+    'Foundation',
+  ];
 
   @override
   void initState() {
@@ -178,55 +188,14 @@ class _PostPropertyScreenState extends State<PostPropertyScreen> {
                       ),
                     ),
                   ),
-                  Container(
-                    margin: const EdgeInsets.only(top: 12),
-                    child: TextFormField(
-                      onChanged: (val) {
-                        setState(() {
-                          type = val;
-                        });
-                      },
-                      validator: (val) {
-                        if (val!.isEmpty) {
-                          return "Please enter a property category";
-                        }
-                        return null;
-                      },
-                      style: FxTextStyle.titleSmall(
-                          letterSpacing: 0,
-                          color: theme.colorScheme.onBackground,
-                          fontWeight: 500),
-                      decoration: InputDecoration(
-                        hintText: "Property Category",
-                        hintStyle: FxTextStyle.titleSmall(
-                            letterSpacing: 0,
-                            color: theme.colorScheme.onBackground,
-                            fontWeight: 500),
-                        border: const OutlineInputBorder(
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(4),
-                            ),
-                            borderSide: BorderSide.none),
-                        enabledBorder: const OutlineInputBorder(
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(4),
-                            ),
-                            borderSide: BorderSide.none),
-                        focusedBorder: const OutlineInputBorder(
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(4),
-                            ),
-                            borderSide: BorderSide.none),
-                        filled: true,
-                        fillColor: customTheme.card,
-                        prefixIcon: const Icon(
-                          MdiIcons.officeBuilding,
-                          size: 22,
-                        ),
-                        isDense: true,
-                        contentPadding: const EdgeInsets.all(0),
-                      ),
-                    ),
+                  MyDropDown(
+                    selectedOption: (val) {
+                      setState(() {
+                        type = val;
+                      });
+                    },
+                    hintText: "Property Category",
+                    options: options,
                   ),
                   Container(
                     margin: const EdgeInsets.only(top: 12),

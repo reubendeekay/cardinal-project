@@ -1,3 +1,4 @@
+import 'package:cardinal/helpers/loading_effect.dart';
 import 'package:cardinal/providers/agent_provider.dart';
 import 'package:cardinal/providers/payment_provider.dart';
 import 'package:cardinal/providers/search_provider.dart.dart';
@@ -21,6 +22,7 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  ErrorWidget.builder = (FlutterErrorDetails details) => GlobalErroe();
   runApp(const MyApp());
 }
 
@@ -55,5 +57,28 @@ class MyApp extends StatelessWidget {
             }),
       ),
     );
+  }
+}
+
+class GlobalErroe extends StatefulWidget {
+  const GlobalErroe({Key? key}) : super(key: key);
+
+  @override
+  State<GlobalErroe> createState() => _GlobalErroeState();
+}
+
+class _GlobalErroeState extends State<GlobalErroe> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    Future.delayed(Duration.zero, () {
+      Get.offAll(() => MainPage());
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return LoadingEffect.getSearchLoadingScreen(context);
   }
 }

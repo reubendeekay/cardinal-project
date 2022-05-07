@@ -46,6 +46,47 @@ class _AccountSettingScreenState extends State<AccountSettingScreen> {
             FxText.bodyLarge("Personal information",
                 fontWeight: 600, letterSpacing: 0),
             Container(
+              margin: const EdgeInsets.only(top: 16),
+              child: TextFormField(
+                style: FxTextStyle.titleSmall(
+                    letterSpacing: 0,
+                    color: theme.colorScheme.onBackground,
+                    fontWeight: 500),
+                decoration: InputDecoration(
+                  hintText: "Full name",
+                  hintStyle: FxTextStyle.titleSmall(
+                      letterSpacing: 0,
+                      color: theme.colorScheme.onBackground,
+                      fontWeight: 500),
+                  border: const OutlineInputBorder(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(4),
+                      ),
+                      borderSide: BorderSide.none),
+                  enabledBorder: const OutlineInputBorder(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(4),
+                      ),
+                      borderSide: BorderSide.none),
+                  focusedBorder: const OutlineInputBorder(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(4),
+                      ),
+                      borderSide: BorderSide.none),
+                  filled: true,
+                  fillColor: customTheme.card,
+                  prefixIcon: const Icon(
+                    MdiIcons.emailOutline,
+                    size: 22,
+                  ),
+                  isDense: true,
+                  contentPadding: const EdgeInsets.all(0),
+                ),
+                keyboardType: TextInputType.emailAddress,
+                textCapitalization: TextCapitalization.sentences,
+              ),
+            ),
+            Container(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[

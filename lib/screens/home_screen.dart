@@ -161,9 +161,8 @@ class _EstateHomeScreenState extends State<EstateHomeScreen> {
                                         context,
                                         listen: false)
                                     .userLocation;
-                                return FxText.bodyMedium(loc!.city! +
-                                    ', ' +
-                                    loc.country!.substring(0, 2).toUpperCase());
+                                return FxText.bodyMedium(
+                                    loc!.state! + ', ' + loc.country!);
                               }
                               return FxText.bodyMedium(
                                 'Nairobi, KE',
@@ -209,10 +208,10 @@ class _EstateHomeScreenState extends State<EstateHomeScreen> {
                   'Recommended',
                   fontWeight: 600,
                 ),
-                FxText.bodySmall(
-                  'More',
-                  xMuted: true,
-                ),
+                // FxText.bodySmall(
+                //   'More',
+                //   xMuted: true,
+                // ),
               ],
             ),
           ),

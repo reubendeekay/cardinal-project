@@ -2,6 +2,7 @@ import 'package:cardinal/helpers/launc_email.dart';
 import 'package:cardinal/helpers/loading_effect.dart';
 import 'package:cardinal/providers/agent_provider.dart';
 import 'package:cardinal/providers/auth_provider.dart';
+import 'package:cardinal/screens/agent/all_agents_properties.dart';
 import 'package:cardinal/screens/agent/dashboard_action_model.dart';
 import 'package:cardinal/screens/agent/agent_dashboard_controler.dart';
 import 'package:cardinal/screens/search_screen.dart';
@@ -9,6 +10,7 @@ import 'package:cardinal/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:flutx/flutx.dart';
+import 'package:get/route_manager.dart';
 import 'package:provider/provider.dart';
 
 class AgentDashboard extends StatefulWidget {
@@ -259,11 +261,18 @@ class _AgentDashboardState extends State<AgentDashboard>
                       letterSpacing: 0,
                       fontWeight: 600,
                     ),
-                    FxText.bodySmall(
-                      'VIEW ALL',
-                      fontWeight: 700,
-                      letterSpacing: 0.3,
-                      color: theme.colorScheme.primary,
+                    InkWell(
+                      onTap: () {
+                        Get.to(() => AllAgentProperies(
+                              agent: agent,
+                            ));
+                      },
+                      child: FxText.bodySmall(
+                        'VIEW ALL',
+                        fontWeight: 700,
+                        letterSpacing: 0.3,
+                        color: theme.colorScheme.primary,
+                      ),
                     ),
                   ],
                 ),
