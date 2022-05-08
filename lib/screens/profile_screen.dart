@@ -143,24 +143,24 @@ class _EstateProfileScreenState extends State<EstateProfileScreen> {
             letterSpacing: 0.8,
           ),
           FxSpacing.height(4),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              FxContainer.rounded(
-                color: customTheme.estatePrimary,
-                height: 6,
-                width: 6,
-                child: Container(),
-              ),
-              FxSpacing.width(6),
-              FxText.labelMedium(
-                'Joined since ' + getCreatedAt(user.createdAt!),
-                color: customTheme.estatePrimary,
-                muted: true,
-                textAlign: TextAlign.center,
-              ),
-            ],
-          ),
+          // Row(
+          //   mainAxisAlignment: MainAxisAlignment.center,
+          //   children: [
+          //     FxContainer.rounded(
+          //       color: customTheme.estatePrimary,
+          //       height: 6,
+          //       width: 6,
+          //       child: Container(),
+          //     ),
+          //     FxSpacing.width(6),
+          //     FxText.labelMedium(
+          //       'Joined since ' + getCreatedAt(user.createdAt!),
+          //       color: customTheme.estatePrimary,
+          //       muted: true,
+          //       textAlign: TextAlign.center,
+          //     ),
+          //   ],
+          // ),
           FxSpacing.height(24),
           FxText.bodySmall(
             'General',

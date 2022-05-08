@@ -374,11 +374,14 @@ class _PropertyDetailsScreenState extends State<PropertyDetailsScreen> {
                         child: Row(
                             children: List.generate(
                                 widget.property.images!.length,
-                                (i) => AspectRatio(
-                                      aspectRatio: 16 / 9,
-                                      child: cachedImage(
-                                          widget.property.images![i],
-                                          fit: BoxFit.cover),
+                                (i) => Container(
+                                      margin: const EdgeInsets.only(right: 15),
+                                      child: AspectRatio(
+                                        aspectRatio: 16 / 9,
+                                        child: cachedImage(
+                                            widget.property.images![i],
+                                            fit: BoxFit.cover),
+                                      ),
                                     )))),
                   ),
                   const SizedBox(
@@ -405,7 +408,7 @@ class _PropertyDetailsScreenState extends State<PropertyDetailsScreen> {
                     ));
               },
               child: FxText.bodyMedium(
-                'Buy Now',
+                'Request booking',
                 color: customTheme.estateOnPrimary,
                 fontWeight: 700,
               ),

@@ -57,9 +57,6 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                 minprice: estateHomeController.selectedRange.start.toString(),
                 maxPrice: estateHomeController.selectedRange.end.toString(),
                 term: widget.searchTerm,
-                type: estateHomeController.categories!
-                    .map((e) => e.category.toLowerCase())
-                    .toList(),
               )
             : Provider.of<SearchProvider>(context, listen: false)
                 .searchData(widget.searchTerm),
@@ -213,8 +210,8 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                     RangeSlider(
                         activeColor: customTheme.estatePrimary,
                         inactiveColor: customTheme.estatePrimary.withAlpha(100),
-                        max: 10000,
-                        min: 0,
+                        max: 1000000,
+                        min: 25000,
                         values: estateHomeController.selectedRange,
                         onChanged: (RangeValues newRange) {
                           setState(() =>
@@ -294,8 +291,19 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                       padding: FxSpacing.horizontal(24),
                       child: FxButton.block(
                         borderRadiusAll: 8,
-                        onPressed: () {
+                        onPressed: () async {
                           setState(() {});
+                          await Provider.of<SearchProvider>(context,
+                                  listen: false)
+                              .detailedSearchProperty(
+                            baths: estateHomeController.selectedBathRooms,
+                            beds: estateHomeController.selectedBedRooms,
+                            minprice: estateHomeController.selectedRange.start
+                                .toString(),
+                            maxPrice: estateHomeController.selectedRange.end
+                                .toString(),
+                            term: widget.searchTerm,
+                          );
                           Navigator.pop(context);
                         },
                         backgroundColor: customTheme.estatePrimary,

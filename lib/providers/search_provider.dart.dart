@@ -88,8 +88,8 @@ class SearchProvider with ChangeNotifier {
     List<dynamic>? type,
     List<dynamic>? beds,
     List<dynamic>? baths,
-    String? minprice = '0',
-    String? maxPrice = '1000000000',
+    String? minprice = '25000',
+    String? maxPrice = '1000000',
     String term = '',
   }) async {
     showLoading = true;
@@ -122,14 +122,15 @@ class SearchProvider with ChangeNotifier {
       });
     }
 
-    for (var element in propertyData.docs) {
-      if (type!.contains(element['type'].toLowerCase())) {
-        if (!propData.contains(PropertyModel.fromJson(element))) {
-          propData.add(PropertyModel.fromJson(element));
+    if (type != null) {
+      for (var element in propertyData.docs) {
+        if (type.contains(element['type'].toLowerCase())) {
+          if (!propData.contains(PropertyModel.fromJson(element))) {
+            propData.add(PropertyModel.fromJson(element));
+          }
         }
       }
     }
-
     for (var element in propertyData.docs) {
       final ammenity = AmmenitiesModel.fromJson(element['ammenities']);
 

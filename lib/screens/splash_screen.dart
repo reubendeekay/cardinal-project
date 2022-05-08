@@ -72,7 +72,7 @@ class _EstateSplashScreenState extends State<EstateSplashScreen> {
                     top: 320,
                     child: FxCard(
                       onTap: () {
-                        controller.goToSearchScreen();
+                        // controller.goToSearchScreen();
                       },
                       borderRadius: const BorderRadius.only(
                           topLeft: Radius.circular(8),
@@ -84,8 +84,8 @@ class _EstateSplashScreenState extends State<EstateSplashScreen> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           FxText.bodyMedium(
-                            'Search by location...',
-                            fontWeight: 700,
+                            'Cardinal Realty',
+                            fontWeight: 800,
                             color: customTheme.estatePrimary,
                           ),
                         ],

@@ -14,7 +14,7 @@ class PropertyController extends FxController {
   // List<House>? houses;
   List selectedBedRooms = [];
   List selectedBathRooms = [];
-  var selectedRange = const RangeValues(200, 800);
+  var selectedRange = const RangeValues(26000, 100000);
 
   @override
   initState() {

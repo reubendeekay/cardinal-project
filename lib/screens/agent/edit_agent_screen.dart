@@ -510,7 +510,7 @@ class _EditAgentScreenState extends State<EditAgentScreen> {
                         profilePicFile: image,
                       );
                       await Provider.of<AgentProvider>(context, listen: false)
-                          .registerAsAgent(agentData)
+                          .updateAgent(agentData)
                           .then((_) {
                         setState(() {
                           isLoading = false;
@@ -520,7 +520,7 @@ class _EditAgentScreenState extends State<EditAgentScreen> {
                     },
                     child: isLoading
                         ? const MyLoader()
-                        : FxText.bodyMedium("REGISTER",
+                        : FxText.bodyMedium("UPDATE DETAILS",
                             fontWeight: 600,
                             color: theme.colorScheme.onPrimary),
                     style: ButtonStyle(

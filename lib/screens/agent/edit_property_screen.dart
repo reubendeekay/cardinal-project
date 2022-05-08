@@ -735,63 +735,59 @@ class _EditPropertyScreenState extends State<EditPropertyScreen> {
                     ],
                   ),
                   child: ElevatedButton(
-                    onPressed: coverImage == null || imageFiles.isEmpty
-                        ? null
-                        : () async {
-                            if (formKey.currentState!.validate()) {
-                              final property = PropertyModel(
-                                address: address ?? widget.property.address,
-                                coverFile: coverImage,
-                                description:
-                                    description ?? widget.property.description,
-                                location: propertyLocation == null
-                                    ? widget.property.location
-                                    : GeoPoint(propertyLocation!.latitude,
-                                        propertyLocation!.longitude),
-                                imageFiles: imageFiles,
-                                price: price != null
-                                    ? price!.replaceAll('KES', '').trim()
-                                    : widget.property.price!.trim(),
-                                name: name ?? widget.property.name,
-                                type: type ?? widget.property.type,
-                                ammenities: AmmenitiesModel(
-                                    beds != null
-                                        ? beds!
-                                            .replaceAll('Bedrooms', '')
-                                            .trim()
-                                        : widget.property.ammenities!.beds,
-                                    baths != null
-                                        ? baths!
-                                            .replaceAll('Bathrooms', '')
-                                            .trim()
-                                        : widget.property.ammenities!.bathrooms,
-                                    floors != null
-                                        ? floors!
-                                            .replaceAll('Floors', '')
-                                            .trim()
-                                        : widget.property.ammenities!.floors,
-                                    area ?? widget.property.ammenities!.area!),
-                                status: 'available',
-                              );
-                              setState(() {
-                                isLoading = true;
-                              });
+                    onPressed: () async {
+                      if (formKey.currentState!.validate()) {
+                        final property = PropertyModel(
+                          address: address ?? widget.property.address,
+                          coverFile: coverImage,
+                          description:
+                              description ?? widget.property.description,
+                          location: propertyLocation == null
+                              ? widget.property.location
+                              : GeoPoint(propertyLocation!.latitude,
+                                  propertyLocation!.longitude),
+                          imageFiles: imageFiles,
+                          price: price != null
+                              ? price!.replaceAll('KES', '').trim()
+                              : widget.property.price!.trim(),
+                          name: name ?? widget.property.name,
+                          type: type ?? widget.property.type,
+                          ammenities: AmmenitiesModel(
+                              beds != null
+                                  ? beds!.replaceAll('Bedrooms', '').trim()
+                                  : widget.property.ammenities!.beds,
+                              baths != null
+                                  ? baths!.replaceAll('Bathrooms', '').trim()
+                                  : widget.property.ammenities!.bathrooms,
+                              floors != null
+                                  ? floors!.replaceAll('Floors', '').trim()
+                                  : widget.property.ammenities!.floors,
+                              area ?? widget.property.ammenities!.area!),
+                          status: 'available',
+                          id: widget.property.id,
+                          ownerId: widget.property.ownerId,
+                          likes: widget.property.likes,
+                          views: widget.property.views,
+                        );
+                        setState(() {
+                          isLoading = true;
+                        });
 
-                              await Provider.of<PropertyProvider>(context,
-                                      listen: false)
-                                  .editProperty(property);
-                              ScaffoldMessenger.of(context)
-                                  .showSnackBar(const SnackBar(
-                                content: Text('Property Edited'),
-                                duration: Duration(seconds: 2),
-                              ));
-                              setState(() {
-                                isLoading = false;
-                              });
+                        await Provider.of<PropertyProvider>(context,
+                                listen: false)
+                            .editProperty(property);
+                        ScaffoldMessenger.of(context)
+                            .showSnackBar(const SnackBar(
+                          content: Text('Property Edited'),
+                          duration: Duration(seconds: 2),
+                        ));
+                        setState(() {
+                          isLoading = false;
+                        });
 
-                              Navigator.pop(context);
-                            }
-                          },
+                        Navigator.pop(context);
+                      }
+                    },
                     child: isLoading
                         ? const MyLoader()
                         : FxText.bodyMedium("Update Property",

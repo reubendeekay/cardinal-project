@@ -210,67 +210,71 @@ class EstateChatController extends FxController {
         .collection('chats')
         .where('receiver', isEqualTo: uid)
         .get();
-
-    await Future.forEach(initiatorChats.docs,
-        (QueryDocumentSnapshot element) async {
-      await FirebaseFirestore.instance
-          .collection('users')
-          .doc(element['receiver'])
-          .get()
-          .then((value) => {
-                // print(value['username']),
-                if (value.exists)
-                  {
-                    users.add(
-                      ChatTileModel(
-                          chatRoomId: element.id,
-                          latestMessageSenderId: element['sentBy'],
-                          user: UserModel(
-                            fullName: value['name'],
-                            profilePic: value['profilePic'],
-                            userId: value.id,
-                            phoneNumber: value['phone'],
-                            lastSeen: value['lastSeen'],
-                            createdAt: value['createdAt'],
-                            email: value['email'],
-                            isOnline: value['isOnline'],
-                            isAgent: value['isAgent'],
-                          ),
-                          latestMessage: element['latestMessage'],
-                          time: element['sentAt']),
-                    ),
-                  }
-              });
-    });
-
-    await Future.forEach(receiverChats.docs,
-        (QueryDocumentSnapshot element) async {
-      await FirebaseFirestore.instance
-          .collection('users')
-          .doc(element['initiator'])
-          .get()
-          .then((value) => {
-                if (value.exists)
-                  {
-                    if (users.where((e) => e.chatRoomId == element.id).isEmpty)
+    try {
+      await Future.forEach(initiatorChats.docs,
+          (QueryDocumentSnapshot element) async {
+        await FirebaseFirestore.instance
+            .collection('users')
+            .doc(element['receiver'])
+            .get()
+            .then((value) => {
+                  // print(value['username']),
+                  if (value.exists)
+                    {
                       users.add(
                         ChatTileModel(
                             chatRoomId: element.id,
                             latestMessageSenderId: element['sentBy'],
                             user: UserModel(
-                                fullName: value['fullName'],
-                                profilePic: value['profilePic'],
-                                userId: value['userId'],
-                                phoneNumber: value['phoneNumber'],
-                                lastSeen: value['lastSeen'],
-                                isOnline: value['isOnline'],
-                                isAgent: value['isAgent']),
+                              fullName: value['name'],
+                              profilePic: value['profilePic'],
+                              userId: value.id,
+                              phoneNumber: value['phone'],
+                              lastSeen: value['lastSeen'],
+                              createdAt: value['createdAt'],
+                              email: value['email'],
+                              isOnline: value['isOnline'],
+                              isAgent: value['isAgent'],
+                            ),
                             latestMessage: element['latestMessage'],
                             time: element['sentAt']),
                       ),
-                  }
-              });
-    });
+                    }
+                });
+      });
+    } catch (e) {}
+    try {
+      await Future.forEach(receiverChats.docs,
+          (QueryDocumentSnapshot element) async {
+        await FirebaseFirestore.instance
+            .collection('users')
+            .doc(element['initiator'])
+            .get()
+            .then((value) => {
+                  if (value.exists)
+                    {
+                      if (users
+                          .where((e) => e.chatRoomId == element.id)
+                          .isEmpty)
+                        users.add(
+                          ChatTileModel(
+                              chatRoomId: element.id,
+                              latestMessageSenderId: element['sentBy'],
+                              user: UserModel(
+                                  fullName: value['fullName'],
+                                  profilePic: value['profilePic'],
+                                  userId: value['userId'],
+                                  phoneNumber: value['phoneNumber'],
+                                  lastSeen: value['lastSeen'],
+                                  isOnline: value['isOnline'],
+                                  isAgent: value['isAgent']),
+                              latestMessage: element['latestMessage'],
+                              time: element['sentAt']),
+                        ),
+                    }
+                });
+      });
+    } catch (e) {}
     users.sort((a, b) => b.time!.compareTo(a.time!));
 
     _contactedUsers = users;

@@ -119,7 +119,7 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
               fontWeight: 600,
             ),
             FxText.bodyMedium(
-              "KES 2,010,513.65",
+              "KES 5,513.65",
               fontWeight: 700,
             ),
           ],
@@ -134,7 +134,7 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
               fontWeight: 600,
             ),
             FxText.bodyMedium(
-              "KES 34,500,001.40",
+              "KES 10,001.40",
               fontWeight: 700,
             ),
           ],
@@ -149,7 +149,7 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
               fontWeight: 600,
             ),
             FxText.bodyMedium(
-              "KES 50,000,020.55",
+              "KES 100,020.55",
               fontWeight: 700,
             ),
           ],

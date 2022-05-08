@@ -63,7 +63,7 @@ class PropertyProvider with ChangeNotifier {
             .doc('recentSearch')
             .collection(uid)
             .doc(searchData.docs
-                .firstWhere((element) => element.data()['term'] == searchTerm)
+                .firstWhere((element) => element['term'] == searchTerm)
                 .id)
             .update({
           'createdAt': Timestamp.now(),
@@ -172,7 +172,7 @@ class PropertyProvider with ChangeNotifier {
         .collection('propertyData/propertyListing/properties')
         .doc(id)
         .delete();
-    await FirebaseFirestore.instance.collection('agents').doc(uid).set({
+    await FirebaseFirestore.instance.collection('agents').doc(uid).update({
       'properties': FieldValue.increment(-1),
     });
     notifyListeners();
