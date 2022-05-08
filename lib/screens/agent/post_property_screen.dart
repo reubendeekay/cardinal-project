@@ -5,6 +5,7 @@ import 'package:cardinal/helpers/my_dropdown.dart';
 import 'package:cardinal/helpers/my_loader.dart';
 import 'package:cardinal/models/ammenities_model.dart';
 import 'package:cardinal/models/property_model.dart';
+import 'package:cardinal/providers/auth_provider.dart';
 import 'package:cardinal/providers/property_provider.dart';
 import 'package:cardinal/theme/app_theme.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -668,6 +669,7 @@ class _PostPropertyScreenState extends State<PostPropertyScreen> {
                                 imageFiles: imageFiles,
                                 price: price,
                                 name: name,
+                                ownerId: uid,
                                 type: type,
                                 views: 0,
                                 ammenities:

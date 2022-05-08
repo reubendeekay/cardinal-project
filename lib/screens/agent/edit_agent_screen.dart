@@ -508,6 +508,8 @@ class _EditAgentScreenState extends State<EditAgentScreen> {
                         userId: FirebaseAuth.instance.currentUser!.uid,
                         website: website ?? agent.website,
                         profilePicFile: image,
+                        profilePic: agent.profilePic,
+                        numProperties: agent.numProperties,
                       );
                       await Provider.of<AgentProvider>(context, listen: false)
                           .updateAgent(agentData)
