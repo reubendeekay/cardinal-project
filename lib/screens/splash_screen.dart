@@ -62,7 +62,7 @@ class _EstateSplashScreenState extends State<EstateSplashScreen> {
                     left: 0,
                     right: 0,
                     child: FxText.displaySmall(
-                      'Dream Home',
+                      'Dream Space',
                       color: customTheme.estateOnPrimary,
                       textAlign: TextAlign.center,
                       fontWeight: 800,

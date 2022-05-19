@@ -7,6 +7,7 @@ import 'package:cardinal/models/property_model.dart';
 import 'package:cardinal/providers/property_provider.dart';
 import 'package:cardinal/theme/app_theme.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:flutx/flutx.dart';
@@ -765,9 +766,11 @@ class _EditPropertyScreenState extends State<EditPropertyScreen> {
                               area ?? widget.property.ammenities!.area!),
                           status: 'available',
                           id: widget.property.id,
-                          ownerId: widget.property.ownerId,
+                          ownerId: FirebaseAuth.instance.currentUser!.uid,
                           likes: widget.property.likes,
                           views: widget.property.views,
+                          images: widget.property.images,
+                          coverImage: widget.property.coverImage,
                         );
                         setState(() {
                           isLoading = true;

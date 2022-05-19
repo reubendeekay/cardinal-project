@@ -23,12 +23,12 @@ class AgentProvider with ChangeNotifier {
       ...agent.toJson(),
     });
 
-    await FirebaseFirestore.instance
-        .collection('users')
-        .doc(agent.userId)
-        .update({
-      'isAgent': true,
-    });
+    // await FirebaseFirestore.instance
+    //     .collection('users')
+    //     .doc(agent.userId)
+    //     .update({
+    //   'isAgent': true,
+    // });
     notifyListeners();
   }
 

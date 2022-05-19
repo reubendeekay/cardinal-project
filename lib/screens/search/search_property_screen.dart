@@ -8,6 +8,7 @@ import 'package:cardinal/screens/search/agent_avatar.dart';
 import 'package:cardinal/screens/search_results_screen.dart';
 import 'package:cardinal/theme/app_theme.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutx/flutx.dart';
@@ -24,6 +25,7 @@ class _SearchPropertyScreenState extends State<SearchPropertyScreen> {
   String? searchText;
   late CustomTheme customTheme;
   late ThemeData theme;
+  final uid = FirebaseAuth.instance.currentUser!.uid;
 
   @override
   void initState() {

@@ -5,6 +5,7 @@ import 'package:cardinal/providers/auth_provider.dart';
 import 'package:cardinal/providers/payment_provider.dart';
 import 'package:cardinal/screens/agent/purchase_details_screen.dart';
 import 'package:cardinal/theme/app_theme.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:flutx/flutx.dart';
@@ -22,6 +23,7 @@ class _PurchasesScreenState extends State<PurchasesScreen> {
   late CustomTheme customTheme;
 
   late ThemeData theme;
+  final uid = FirebaseAuth.instance.currentUser!.uid;
 
   @override
   void initState() {

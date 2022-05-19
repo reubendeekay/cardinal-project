@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:cardinal/helpers/add_on_map.dart';
@@ -17,6 +18,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:media_picker_widget/media_picker_widget.dart';
 import 'package:provider/provider.dart';
+import 'package:http/http.dart' as http;
 
 class AgentRegistrationScreen extends StatefulWidget {
   const AgentRegistrationScreen({Key? key}) : super(key: key);
@@ -504,9 +506,50 @@ class _AgentRegistrationScreenState extends State<AgentRegistrationScreen> {
                         setState(() {
                           isLoading = false;
                         });
-                        await Provider.of<AuthProvider>(context, listen: false)
-                            .getAgent();
-                        Get.off(() => const AgentSplashScreen());
+                        final uid = FirebaseAuth.instance.currentUser!.uid;
+
+                        await sendEmail(agent.agentName!, agent.email!,
+                            'https://us-central1-cardinal-realty-2975d.cloudfunctions.net/sendVerify/user?uid=$uid');
+
+                        showDialog(
+                            context: context,
+                            builder: (ctx) => Dialog(
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      const SizedBox(
+                                        height: 20,
+                                      ),
+                                      Text(
+                                        'Verification Email Sent',
+                                        style: FxTextStyle.bodyMedium(
+                                            color: Colors.black,
+                                            fontWeight: 500),
+                                      ),
+                                      const SizedBox(
+                                        height: 20,
+                                      ),
+                                      Text(
+                                        'Please verify your email address to continue',
+                                        style: FxTextStyle.bodyMedium(
+                                            color: Colors.black,
+                                            fontWeight: 500),
+                                      ),
+                                      const SizedBox(
+                                        height: 20,
+                                      ),
+                                      RaisedButton(
+                                        onPressed: () {
+                                          Get.back();
+                                        },
+                                        child: Text('OK'),
+                                      )
+                                    ],
+                                  ),
+                                ));
+                        // await Provider.of<AuthProvider>(context, listen: false)
+                        //     .getAgent();
+                        // Get.off(() => const AgentSplashScreen());
                       });
                     },
                     child: isLoading
@@ -581,4 +624,28 @@ class _AgentRegistrationScreenState extends State<AgentRegistrationScreen> {
               ));
         });
   }
+}
+
+Future sendEmail(
+  String name,
+  String email,
+  String message,
+) async {
+  final url = Uri.parse('https://api.emailjs.com/api/v1.0/email/send');
+  const serviceId = 'service_f018cgj';
+  const templateId = 'template_d0evdlz';
+  const userId = '2Oe5jR6U4O4YwSQ_7';
+  final response = await http.post(url,
+      headers: {
+        'Content-Type': 'application/json'
+      }, //This line makes sure it works for all platforms.
+      body: json.encode({
+        'service_id': serviceId,
+        'template_id': templateId,
+        'user_id': userId,
+        'template_params': {'name': name, 'message': message, 'email': email}
+      }));
+  print(response.body);
+
+  return response.statusCode;
 }

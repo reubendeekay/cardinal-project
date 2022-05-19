@@ -1,3 +1,4 @@
+import 'package:cardinal/helpers/mpesa_helper.dart';
 import 'package:cardinal/helpers/my_loader.dart';
 import 'package:cardinal/models/property_model.dart';
 import 'package:cardinal/models/request_model.dart';
@@ -8,6 +9,7 @@ import 'package:cardinal/screens/payment/checkout_controller.dart';
 import 'package:cardinal/screens/payment/shipping_address.dart';
 import 'package:cardinal/theme/app_theme.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
@@ -29,6 +31,7 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
 
   late CheckOutController controller;
   bool isLoading = false;
+  final uid = FirebaseAuth.instance.currentUser!.uid;
 
   @override
   void initState() {
@@ -274,6 +277,10 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                   setState(() {
                     isLoading = false;
                   });
+                  await mpesaPayment(
+                    phone: '254796660187',
+                    amount: 1,
+                  );
                   controller.nextPage();
                 },
                 borderRadiusAll: 4,

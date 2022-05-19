@@ -1,6 +1,6 @@
 import 'package:cardinal/models/property_model.dart';
-import 'package:cardinal/providers/auth_provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutx/flutx.dart';
 
 class PropertyDetailsController extends FxController {
@@ -33,6 +33,8 @@ class PropertyDetailsController extends FxController {
   }
 
   Future<void> addWishList(String id, bool exitsts) async {
+    final uid = FirebaseAuth.instance.currentUser!.uid;
+
     await FirebaseFirestore.instance
         .collection('propertyData')
         .doc('propertyListing')

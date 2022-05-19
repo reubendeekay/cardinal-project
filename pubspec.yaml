@@ -47,10 +47,12 @@ dependencies:
   get: ^4.6.1
   google_fonts: ^2.0.0
   google_maps_flutter: ^2.0.3
+  http: ^0.13.4
   intl: ^0.17.0
   location: ^4.3.0
   material_design_icons_flutter: ^5.0.6595
   media_picker_widget: ^0.0.7
+  mpesa: ^2.0.2
   provider: ^6.0.2
   readmore: ^2.1.0
   rive: ^0.8.1

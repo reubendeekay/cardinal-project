@@ -1,8 +1,10 @@
+import 'package:cardinal/providers/auth_provider.dart';
 import 'package:cardinal/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:flutx/flutx.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:provider/provider.dart';
 
 class AccountSettingScreen extends StatefulWidget {
   const AccountSettingScreen({Key? key}) : super(key: key);
@@ -25,6 +27,7 @@ class _AccountSettingScreenState extends State<AccountSettingScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final user = Provider.of<AuthProvider>(context, listen: false).user;
     return Scaffold(
         appBar: AppBar(
           backgroundColor: theme.scaffoldBackgroundColor,
@@ -52,9 +55,10 @@ class _AccountSettingScreenState extends State<AccountSettingScreen> {
                     letterSpacing: 0,
                     color: theme.colorScheme.onBackground,
                     fontWeight: 500),
+                initialValue: user!.fullName!,
                 decoration: InputDecoration(
-                  hintText: "Full name",
-                  hintStyle: FxTextStyle.titleSmall(
+                  labelText: "Full name",
+                  labelStyle: FxTextStyle.titleSmall(
                       letterSpacing: 0,
                       color: theme.colorScheme.onBackground,
                       fontWeight: 500),
@@ -93,13 +97,14 @@ class _AccountSettingScreenState extends State<AccountSettingScreen> {
                   Container(
                     margin: const EdgeInsets.only(top: 16),
                     child: TextFormField(
+                      initialValue: user.email!,
                       style: FxTextStyle.titleSmall(
                           letterSpacing: 0,
                           color: theme.colorScheme.onBackground,
                           fontWeight: 500),
                       decoration: InputDecoration(
-                        hintText: "Email",
-                        hintStyle: FxTextStyle.titleSmall(
+                        labelText: "Email",
+                        labelStyle: FxTextStyle.titleSmall(
                             letterSpacing: 0,
                             color: theme.colorScheme.onBackground,
                             fontWeight: 500),
@@ -134,13 +139,14 @@ class _AccountSettingScreenState extends State<AccountSettingScreen> {
                   Container(
                     margin: const EdgeInsets.only(top: 12),
                     child: TextFormField(
+                      initialValue: user.phoneNumber!,
                       style: FxTextStyle.titleSmall(
                           letterSpacing: 0,
                           color: theme.colorScheme.onBackground,
                           fontWeight: 500),
                       decoration: InputDecoration(
-                        hintText: "Number",
-                        hintStyle: FxTextStyle.titleSmall(
+                        labelText: "Number",
+                        labelStyle: FxTextStyle.titleSmall(
                             letterSpacing: 0,
                             color: theme.colorScheme.onBackground,
                             fontWeight: 500),
@@ -175,138 +181,6 @@ class _AccountSettingScreenState extends State<AccountSettingScreen> {
               ),
             ),
             Container(
-              margin: const EdgeInsets.only(top: 24, bottom: 0),
-              child: FxText.bodyLarge("Company information",
-                  fontWeight: 600, letterSpacing: 0),
-            ),
-            Container(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Container(
-                    margin: const EdgeInsets.only(top: 16),
-                    child: TextFormField(
-                      style: FxTextStyle.titleSmall(
-                          letterSpacing: 0,
-                          color: theme.colorScheme.onBackground,
-                          fontWeight: 500),
-                      decoration: InputDecoration(
-                        hintText: "Name",
-                        hintStyle: FxTextStyle.titleSmall(
-                            letterSpacing: 0,
-                            color: theme.colorScheme.onBackground,
-                            fontWeight: 500),
-                        border: const OutlineInputBorder(
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(4),
-                            ),
-                            borderSide: BorderSide.none),
-                        enabledBorder: const OutlineInputBorder(
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(4),
-                            ),
-                            borderSide: BorderSide.none),
-                        focusedBorder: const OutlineInputBorder(
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(4),
-                            ),
-                            borderSide: BorderSide.none),
-                        filled: true,
-                        fillColor: customTheme.card,
-                        prefixIcon: const Icon(
-                          MdiIcons.domain,
-                          size: 22,
-                        ),
-                        isDense: true,
-                        contentPadding: const EdgeInsets.all(0),
-                      ),
-                      textCapitalization: TextCapitalization.sentences,
-                    ),
-                  ),
-                  Container(
-                    margin: const EdgeInsets.only(top: 12),
-                    child: TextFormField(
-                      style: FxTextStyle.titleSmall(
-                          letterSpacing: 0,
-                          color: theme.colorScheme.onBackground,
-                          fontWeight: 500),
-                      decoration: InputDecoration(
-                        hintText: "Job Title",
-                        hintStyle: FxTextStyle.titleSmall(
-                            letterSpacing: 0,
-                            color: theme.colorScheme.onBackground,
-                            fontWeight: 500),
-                        border: const OutlineInputBorder(
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(4),
-                            ),
-                            borderSide: BorderSide.none),
-                        enabledBorder: const OutlineInputBorder(
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(4),
-                            ),
-                            borderSide: BorderSide.none),
-                        focusedBorder: const OutlineInputBorder(
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(4),
-                            ),
-                            borderSide: BorderSide.none),
-                        filled: true,
-                        fillColor: customTheme.card,
-                        prefixIcon: const Icon(
-                          MdiIcons.briefcaseOutline,
-                          size: 22,
-                        ),
-                        isDense: true,
-                        contentPadding: const EdgeInsets.all(0),
-                      ),
-                      textCapitalization: TextCapitalization.sentences,
-                    ),
-                  ),
-                  Container(
-                    margin: const EdgeInsets.only(top: 12),
-                    child: TextFormField(
-                      style: FxTextStyle.titleSmall(
-                          letterSpacing: 0,
-                          color: theme.colorScheme.onBackground,
-                          fontWeight: 500),
-                      decoration: InputDecoration(
-                        hintText: "Website",
-                        hintStyle: FxTextStyle.titleSmall(
-                            letterSpacing: 0,
-                            color: theme.colorScheme.onBackground,
-                            fontWeight: 500),
-                        border: const OutlineInputBorder(
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(4),
-                            ),
-                            borderSide: BorderSide.none),
-                        enabledBorder: const OutlineInputBorder(
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(4),
-                            ),
-                            borderSide: BorderSide.none),
-                        focusedBorder: const OutlineInputBorder(
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(4),
-                            ),
-                            borderSide: BorderSide.none),
-                        filled: true,
-                        fillColor: customTheme.card,
-                        prefixIcon: const Icon(
-                          MdiIcons.web,
-                          size: 22,
-                        ),
-                        isDense: true,
-                        contentPadding: const EdgeInsets.all(0),
-                      ),
-                      textCapitalization: TextCapitalization.sentences,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Container(
               margin: const EdgeInsets.only(top: 24),
               child: FxText.bodyLarge("Change Password",
                   fontWeight: 600, letterSpacing: 0),
@@ -319,8 +193,8 @@ class _AccountSettingScreenState extends State<AccountSettingScreen> {
                     color: theme.colorScheme.onBackground,
                     fontWeight: 500),
                 decoration: InputDecoration(
-                  hintText: "Old Password",
-                  hintStyle: FxTextStyle.titleSmall(
+                  labelText: "Old Password",
+                  labelStyle: FxTextStyle.titleSmall(
                       letterSpacing: 0,
                       color: theme.colorScheme.onBackground,
                       fontWeight: 500),
@@ -367,8 +241,8 @@ class _AccountSettingScreenState extends State<AccountSettingScreen> {
                     color: theme.colorScheme.onBackground,
                     fontWeight: 500),
                 decoration: InputDecoration(
-                  hintText: " Password",
-                  hintStyle: FxTextStyle.titleSmall(
+                  labelText: " Password",
+                  labelStyle: FxTextStyle.titleSmall(
                       letterSpacing: 0,
                       color: theme.colorScheme.onBackground,
                       fontWeight: 500),

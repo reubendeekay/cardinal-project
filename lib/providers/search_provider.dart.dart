@@ -2,6 +2,7 @@ import 'package:cardinal/models/ammenities_model.dart';
 import 'package:cardinal/models/property_model.dart';
 import 'package:cardinal/providers/auth_provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 
 class SearchProvider with ChangeNotifier {
@@ -52,6 +53,8 @@ class SearchProvider with ChangeNotifier {
   }
 
   Future<void> addRecentSearch(String searchTerm) async {
+    final uid = FirebaseAuth.instance.currentUser!.uid;
+
     if (searchTerm.isNotEmpty) {
       final searchData = await FirebaseFirestore.instance
           .collection('userData')

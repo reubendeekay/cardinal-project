@@ -2,9 +2,9 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cardinal/controllers/chat_controller.dart';
 import 'package:cardinal/helpers/loading_effect.dart';
 import 'package:cardinal/models/message_model.dart';
-import 'package:cardinal/providers/auth_provider.dart';
 import 'package:cardinal/theme/app_theme.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:flutx/flutx.dart';
 import 'package:intl/intl.dart';
@@ -27,6 +27,7 @@ class _ChatRoomState extends State<ChatRoom> {
   late CustomTheme customTheme;
   late ChatRoomController estateSingleChatController;
   TextEditingController messageController = TextEditingController();
+  final uid = FirebaseAuth.instance.currentUser!.uid;
 
   @override
   void initState() {

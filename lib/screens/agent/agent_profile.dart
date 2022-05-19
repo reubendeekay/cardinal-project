@@ -11,6 +11,7 @@ import 'package:cardinal/screens/agent/all_agents_properties.dart';
 import 'package:cardinal/screens/chat_room.dart';
 import 'package:cardinal/theme/app_theme.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutx/flutx.dart';
 import 'package:get/route_manager.dart';
@@ -36,6 +37,7 @@ class _AgentProfileState extends State<AgentProfile> {
   late CustomTheme customTheme;
   late AgentController estateSingleAgentController;
   late EstateChatController estateChatController;
+  final uid = FirebaseAuth.instance.currentUser!.uid;
 
   @override
   void initState() {

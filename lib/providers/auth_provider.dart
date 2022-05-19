@@ -6,8 +6,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/foundation.dart';
 
-final uid = FirebaseAuth.instance.currentUser!.uid;
-
 class AuthProvider with ChangeNotifier {
   bool isOnline = false;
   UserModel? _user;
@@ -105,6 +103,8 @@ class AuthProvider with ChangeNotifier {
   }
 
   Future<void> getAgent() async {
+    final uid = FirebaseAuth.instance.currentUser!.uid;
+
     try {
       final agentResults =
           await FirebaseFirestore.instance.collection('agents').doc(uid).get();
@@ -117,6 +117,8 @@ class AuthProvider with ChangeNotifier {
   }
 
   Future<void> getOnlineStatus() async {
+    final uid = FirebaseAuth.instance.currentUser!.uid;
+
     final databaseRef = FirebaseDatabase.instance.ref('users/$uid');
     if (isOnline) {
       databaseRef.update({
@@ -137,6 +139,8 @@ class AuthProvider with ChangeNotifier {
   }
 
   Future<void> updateProfile(UserModel update) async {
+    final uid = FirebaseAuth.instance.currentUser!.uid;
+
     await FirebaseFirestore.instance.collection('users').doc(uid).update({
       'name': update.fullName,
       'email': update.email,

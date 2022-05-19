@@ -408,7 +408,7 @@ class _PropertyDetailsScreenState extends State<PropertyDetailsScreen> {
                     ));
               },
               child: FxText.bodyMedium(
-                'Request booking',
+                'Rent Now',
                 color: customTheme.estateOnPrimary,
                 fontWeight: 700,
               ),

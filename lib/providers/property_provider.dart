@@ -32,6 +32,8 @@ class PropertyProvider with ChangeNotifier {
   }
 
   Future<void> fetchAgentProperties() async {
+    final uid = FirebaseAuth.instance.currentUser!.uid;
+
     final propertyData = await FirebaseFirestore.instance
         .collection('propertyData')
         .doc('propertyListing')
@@ -51,6 +53,8 @@ class PropertyProvider with ChangeNotifier {
 
 //On editing
   Future<void> addRecentSearch(String searchTerm) async {
+    final uid = FirebaseAuth.instance.currentUser!.uid;
+
     if (searchTerm.isNotEmpty) {
       final searchData = await FirebaseFirestore.instance
           .collection('userData')
@@ -102,6 +106,7 @@ class PropertyProvider with ChangeNotifier {
     final ref = FirebaseFirestore.instance
         .collection('propertyData/propertyListing/properties');
     final id = ref.doc().id;
+    final uid = FirebaseAuth.instance.currentUser!.uid;
 
     final coverUpload = await FirebaseStorage.instance
         .ref('propertyImages/$id')
@@ -168,6 +173,8 @@ class PropertyProvider with ChangeNotifier {
   }
 
   Future<void> deleteProperty(String id) async {
+    final uid = FirebaseAuth.instance.currentUser!.uid;
+
     await FirebaseFirestore.instance
         .collection('propertyData/propertyListing/properties')
         .doc(id)
@@ -179,6 +186,8 @@ class PropertyProvider with ChangeNotifier {
   }
 
   Future<List<PropertyModel>> fetchYourWishlist() async {
+    final uid = FirebaseAuth.instance.currentUser!.uid;
+
     final userData =
         await FirebaseFirestore.instance.collection('users').doc(uid).get();
 

@@ -3,12 +3,13 @@ import 'package:cardinal/models/request_model.dart';
 import 'package:cardinal/models/user_model.dart';
 import 'package:cardinal/providers/auth_provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 
 final userPurchaseRef = FirebaseFirestore.instance
     .collection('userData')
     .doc('purchases')
-    .collection(uid);
+    .collection(FirebaseAuth.instance.currentUser!.uid);
 
 class PaymentProvider with ChangeNotifier {
   bool uiLoading = false;
